@@ -1,14 +1,5 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $bdname = "gestaodeInventario";
-
-    $conn = new mysqli( $servername, $username, $password, $bdname);
-
-    if($conn->connect_error) {
-        die("Erro na conexão". $conn->connect_error);
-    }
+   include('configPHP.php');
 ?>
 
 <!DOCTYPE html>
@@ -24,8 +15,21 @@
             padding:0;
             font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
-        body{
-            padding-top: 100px;
+        header{
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: #333;
+            height: 50px;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+        .conteiner-h1{
+            margin: 0 auto;
+        } 
+        a{
+            color: white;
+            text-decoration: none;
         }
         .conteiner-form {
             margin:0 auto;
@@ -42,6 +46,7 @@
         .title{
             color: #fff;
             margin-bottom: 20px;
+            text-decoration: none;
         }
         .conteiner-campos{
             display: flex;
@@ -110,6 +115,14 @@
     </style>
 </head>
 <body>
+    <header>
+       <div class="conteiner-h1">
+            <a href="index.php"> <h1 class="title"> Gestão de Inventário </h1> </a>
+        </div>
+    </header>
+
+
+
 <section>
     <div class="conteiner-form">
         <h1 class="title"> Editar produto do Estoque </h1>
@@ -130,7 +143,7 @@
                     $nome_produto = $_POST['nome_produto'];
                 
 
-                $sql = "SELECT id, nome, quantidade, preco, data_venci, categoria FROM estoque WHERE nome LIKE '%$nome_produto%' ";
+                $sql = "SELECT id, nome, quantidade, preco, data_venci, categoria, codigo_produto FROM produto WHERE nome LIKE '%$nome_produto%' ";
                 $result = $conn->query($sql); 
 
 
@@ -143,6 +156,7 @@
                             echo "<td>".$row['preco']."</td>";
                             echo "<td>".$row['data_venci']."</td>";
                             echo "<td>".$row['categoria']."</td>";
+                            echo "<td>".$row['codigo_produto']."</td>";
                             echo "<td>
                                     <a class='acoes' id='Editar' href='phpEdit.php?id=$row[id]' title='Editar'> &#10000 </a>
                                 </td></tr>";
