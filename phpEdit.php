@@ -5,8 +5,21 @@
             padding:0;
             font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
-        body{
-            padding-top: 100px;
+        header{
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: #333;
+            height: 50px;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+        .conteiner-h1{
+            margin: 0 auto;
+        }
+        a{
+            color: white;
+            text-decoration: none;
         }
         .title{
             color: #fff;
@@ -65,20 +78,11 @@
 <div class="conteiner-edit" id="phpEdit.php">
     <?php
         if(!empty($_GET['id'])) {
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $bdname = "gestaodeInventario";
-        
-            $conn = new mysqli( $servername, $username, $password, $bdname);
-        
-            if($conn->connect_error) {
-                die("Erro na conexão". $conn->connect_error);
-            }
+           include('configPHP.php');
             
             $id = $_GET['id'];
 
-            $consul = "SELECT * FROM estoque WHERE id = $id";
+            $consul = "SELECT * FROM produto WHERE id = $id";
             $result = $conn->query($consul);
 
             if($result->num_rows > 0) {
@@ -89,6 +93,7 @@
                     $preco_produto = $user_data['preco'];
                     $data_venci = $user_data['data_venci'];
                     $categoria = $user_data['categoria'];
+                    $codigo_produto = $user_data['codigo_produto'];
                 }
             } else {
                 header('Location: Editar.php');
@@ -96,10 +101,17 @@
         }
     ?>
 
+    <header>
+        <div class="conteiner-h1">
+            <a href="index.php"> <h1 class="title"> Gestão de Inventário </h1> </a>
+        </div>
+    </header>
+
+
 
         <h1 class="title"> Editar produto do Estoque </h1>
 
-        <form action="update.php" method="post" class="conteiner-campos">
+        <form action="update_produto.php" method="post" class="conteiner-campos">
                 <input type="hidden" name="id" value="<?php echo $id ?>">
 
                 <label> Nome do produto: </label>
@@ -110,6 +122,9 @@
 
                 <label> Preço: </label>
                 <input type="number" name="preco" step="0.01" id="preco" class="campos" value="<?php echo $preco_produto ?>">
+
+                <label> Código do produto: </label>
+                <input type="text" name="codigo_produto" maxlength="13" id="codigo" class="campos" value="<?php echo $codigo_produto ?>">
 
                 <label> Data de validade: </label>
                 <input type="date" name="data_venci" step="0.01" id="preco" class="campos" value="<?php echo $data_venci ?>">
