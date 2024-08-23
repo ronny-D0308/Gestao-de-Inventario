@@ -11,8 +11,21 @@
             padding:0;
             font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
-        body{
-            padding-top: 100px;
+        header{
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: #333;
+            height: 50px;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+        .conteiner-h1{
+            margin: 0 auto;
+        }
+        a{
+            color: white;
+            text-decoration: none;
         }
         .conteiner-form {
             margin:0 auto;
@@ -67,6 +80,11 @@
     </style>
 </head>
 <body>
+    <header>
+        <div class="conteiner-h1">
+            <a href="index.php"> <h1 class="title"> Gestão de Inventário </h1> </a>        
+        </div>
+    </header>
 
     <div class="conteiner-form">
         <h1 class="title"> Adicionar produto ao Estoque </h1>
@@ -78,6 +96,8 @@
                 <input type="number" name="quantidade" class="campos" required>
                 <label> Preço: </label>
                 <input type="number" name="preco" step="0.01" id="preco" class="campos" required>
+                <label> Código do produto: </label>
+                <input type="text" name="codigo_produto" maxlength="13" class="campos" required>
                 <label> Data de validade: </label>
                 <input type="date" name="data_venci" step="0.01" id="preco" class="campos" >
 
